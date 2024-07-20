@@ -76,7 +76,7 @@ string generate_random_numeric_string_of_length_n(int n){
 }
 
 
-// Generates a random vector of length n having values of mini and maxi length
+// Generates a random vector of length n having values in between mini and maxi
 vector<int> generate_vector_of_random_value_of_length_n(int n, int minimum_element, int maximum_element){
     vector<int> v;
     
