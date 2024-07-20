@@ -18,7 +18,7 @@ int generate_random_number(int range){
 }
 
 
-// Generate lowercase string of length n
+// Generate random lowercase string of length n
 string generate_lowercase_string_of_length_n(int n){
     string s="";
 
@@ -31,7 +31,7 @@ string generate_lowercase_string_of_length_n(int n){
 }
 
 
-// Generate uppercase string of length n
+// Generate random uppercase string of length n
 string generate_uppercase_string_of_length_n(int n){
     string s="";
 
@@ -44,7 +44,7 @@ string generate_uppercase_string_of_length_n(int n){
 }
 
 
-// Generate upper lower both case string of length n
+// Generate random upper & lower both case string of length n
 string generate_both_case_string_of_length_n(int n){
     string s="";
 
@@ -57,6 +57,19 @@ string generate_both_case_string_of_length_n(int n){
         }else{
             s+=(x+97);
         }
+    }
+
+    return s;
+}
+
+
+// Generate random numeric string of length n
+string generate_numeric_string_of_length_n(int n){
+    string s="";
+
+    for(int i=0; i<n; i++){
+        int x=(rand()%10);
+        s+=(x+48);
     }
 
     return s;
@@ -108,6 +121,7 @@ void print_verdict(string &output1, string &output2){
 void print_input(int n, vector<int> &v){
     cout<<"Input"<<endl;
     cout<<"--------------------------"<<endl;
+
     cout<<n<<endl;
     for(int val : v){
         cout<<val<<" ";
