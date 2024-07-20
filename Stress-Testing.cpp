@@ -19,7 +19,7 @@ int generate_random_number(int range){
 
 
 // Generate random lowercase string of length n
-string generate_lowercase_string_of_length_n(int n){
+string generate_random_lowercase_string_of_length_n(int n){
     string s="";
 
     for(int i=0; i<n; i++){
@@ -32,7 +32,7 @@ string generate_lowercase_string_of_length_n(int n){
 
 
 // Generate random uppercase string of length n
-string generate_uppercase_string_of_length_n(int n){
+string generate_random_uppercase_string_of_length_n(int n){
     string s="";
 
     for(int i=0; i<n; i++){
@@ -45,7 +45,7 @@ string generate_uppercase_string_of_length_n(int n){
 
 
 // Generate random upper & lower both case string of length n
-string generate_both_case_string_of_length_n(int n){
+string generate_random_both_case_string_of_length_n(int n){
     string s="";
 
     for(int i=0; i<n; i++){
@@ -64,7 +64,7 @@ string generate_both_case_string_of_length_n(int n){
 
 
 // Generate random numeric string of length n
-string generate_numeric_string_of_length_n(int n){
+string generate_random_numeric_string_of_length_n(int n){
     string s="";
 
     for(int i=0; i<n; i++){
@@ -77,7 +77,7 @@ string generate_numeric_string_of_length_n(int n){
 
 
 // Generates a random vector of length n having values of mini and maxi length
-vector<int> generate_vector_of_random_value_length_n(int n, int minimum_element, int maximum_element){
+vector<int> generate_vector_of_random_value_of_length_n(int n, int minimum_element, int maximum_element){
     vector<int> v;
     
     for(int i=0; i<n; i++){
@@ -168,7 +168,7 @@ void stress_testing(int &test_case){
 
     // Generate inputs
     int n=generate_random_number(10);
-    vector<int> v=generate_vector_of_random_value_length_n(n,1,3);
+    vector<int> v=generate_vector_of_random_value_of_length_n(n,1,3);
 
     // Print input
     print_input(n,v);
