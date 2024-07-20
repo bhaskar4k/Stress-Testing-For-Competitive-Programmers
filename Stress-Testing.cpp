@@ -91,7 +91,7 @@ vector<int> generate_vector_of_random_value_of_length_n(int n, int minimum_eleme
 
 
 // Print captured outputs and final verdicts
-void print_verdict(string &output1, string &output2){   
+void print_verdict(string &output1, string &output2){  
     cout<<"Output Of Your Function"<<endl;
     cout<<"------------------------"<<endl;
     cout<<output1<<endl;
@@ -109,6 +109,16 @@ void print_verdict(string &output1, string &output2){
 
     cout<<"____________________________________________________________________________"<<endl<<endl<<endl;
 }
+
+
+// Final verdict judging
+void get_final_verdict(string output1, string output2, streambuf* &oldCout){
+    // Restore standard output
+    cout.rdbuf(oldCout);
+
+    // Print final verdict
+    print_verdict(output1,output2);
+}
 //----------------------------------------------------------------------------
 
 
@@ -117,11 +127,12 @@ void print_verdict(string &output1, string &output2){
 //----------------------------------------------------------------------------
 // Your working area
 
-// Print input
-void print_input(int n, vector<int> &v){
+// Print inputs to see the generated testcase
+void print_input(int n, vector<int> &v){ // Update parameters by generated inputs
     cout<<"Input"<<endl;
     cout<<"--------------------------"<<endl;
 
+    // Update printing statements of inputs to see the generated testcases
     cout<<n<<endl;
     for(int val : v){
         cout<<val<<" ";
@@ -130,14 +141,19 @@ void print_input(int n, vector<int> &v){
 
 
 // Fill your function that you want to test
-void your_function(int &n, vector<int> v) {
+void your_function(int &n, vector<int> v) { // Update parameters by generated inputs
+    if(v.size()<2){
+        cout<<"No second smallest"<<endl;
+        return;
+    }
+
     sort(v.begin(),v.end());
     cout<<v[1]<<endl;
 }
 
 
 // Write the bruteforce solution
-void bruteforce_function(int &n, vector<int> v) {
+void bruteforce_function(int &n, vector<int> v) { // Update parameters by generated inputs
     int mini=1e9;
     for(int i=0; i<n; i++){
         mini=min(mini,v[i]);
@@ -159,39 +175,30 @@ void bruteforce_function(int &n, vector<int> v) {
 
 
 // Stress testing function
-void stress_testing(int &test_case){
-    // Create string streams to capture the outputs
-    ostringstream oss1, oss2;
-
-    // Redirect standard output to the string streams
-    streambuf* oldCout=cout.rdbuf();
-
-    // Generate inputs
+void stress_testing(int &test_case, ostringstream &oss1, ostringstream &oss2, streambuf* &oldCout){
+    // Generate inputs ---------------------------------------------------------------------------
     int n=generate_random_number(10);
     vector<int> v=generate_vector_of_random_value_of_length_n(n,1,3);
 
-    // Print input
-    print_input(n,v);
+    // Print inputs
+    print_input(n,v); // Update parameters by generated inputs
+    //--------------------------------------------------------------------------------------------
 
-    // Capture output of your_function()
-    cout.rdbuf(oss1.rdbuf());
+
+    // Calling your_function() -------------------------------------------------------------------
+    cout.rdbuf(oss1.rdbuf()); // Capture output of your_function() 
     
-    // Call your function by passing same input
-    your_function(n,v);
-    string output1=oss1.str();
+    your_function(n,v); // Update parameters by generated inputs
+    //--------------------------------------------------------------------------------------------
     
-    // Capture output of bruteforce_function()
-    cout.rdbuf(oss2.rdbuf());
 
-    // Call bruteforce function by passing same input
-    bruteforce_function(n,v);
-    string output2=oss2.str();
+    // Calling bruteforce_function() -------------------------------------------------------------
+    cout.rdbuf(oss2.rdbuf()); // Capture output of bruteforce_function()
 
-    // Restore standard output
-    cout.rdbuf(oldCout);
+    bruteforce_function(n,v); // Update parameters by generated inputs
+    //--------------------------------------------------------------------------------------------
 
-    // Print final verdict
-    print_verdict(output1,output2);
+    get_final_verdict(oss1.str(),oss2.str(),oldCout);
 }
 //----------------------------------------------------------------------------
 
@@ -208,7 +215,14 @@ int main(){
         cout<<"-----------------------------------"<<endl;
         cout<<"|          Test Case - "<<test<<"          |"<<endl;
         cout<<"-----------------------------------"<<endl<<endl;
-        stress_testing(test);
+
+        // Create string streams to capture the outputs
+        ostringstream oss1, oss2;
+
+        // Redirect standard output to the string streams
+        streambuf* oldCout=cout.rdbuf();
+
+        stress_testing(test,oss1,oss2,oldCout);
     }
 
     return 0;
